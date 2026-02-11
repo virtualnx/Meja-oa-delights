@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mejañoa Delights - Weekly Rotating Menu</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -384,8 +385,57 @@
             color: white;
         }
 
-        .cookie-item:hover .available-tag {
+            .cookie-item:hover .available-tag {
             color: white;
+        }
+
+        /* Info Modal (Learn More) */
+        .info-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-modal.active { display: flex; }
+
+        .info-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 700px;
+            width: 92%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            color: var(--dark);
+        }
+
+        .info-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .info-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .info-sub { color: var(--gray); font-weight: 300; margin-bottom: 1rem; }
+        .info-body { line-height: 1.7; color: var(--dark); }
+
+        .cookie-item:hover .learn-more-btn {
+            background: white;
+            color: var(--pink);
+            border-color: white;
         }
 
         .cookie-image-wrapper {
@@ -479,6 +529,321 @@
             font-weight: 500;
             font-size: 0.9rem;
             transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .learn-more-btn {
+            background: transparent;
+            color: var(--pink);
+            border: 2px solid var(--pink);
+            padding: 0.7rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .learn-more-btn:hover {
+            background: var(--pink);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 8rem 3rem;
+            background: var(--cream);
+        }
+
+        .testimonials-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-card:nth-child(1) { animation-delay: 0.2s; }
+        .testimonial-card:nth-child(2) { animation-delay: 0.3s; }
+        .testimonial-card:nth-child(3) { animation-delay: 0.4s; }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(139, 21, 56, 0.15);
+        }
+
+        .stars {
+            color: #FFD700;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            color: var(--gray);
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--pink);
+            font-size: 0.95rem;
+        }
+
+        .testimonial-role {
+            color: var(--gray);
+            font-weight: 300;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Rewards Section */
+        .rewards {
+            padding: 8rem 3rem;
+            background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+            color: white;
+        }
+
+        .rewards .section-title h2 {
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        .rewards .section-title p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        .rewards-section-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 4rem;
+        }
+
+        .rewards-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .rewards-info p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+        }
+
+        .rewards-benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .benefit-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .benefit-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .benefit-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .benefit-item p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 1024px) {
+            .rewards-section-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .rewards-benefits {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .rewards {
+                padding: 4rem 2rem;
+            }
+
+            .rewards .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .rewards-info h3 {
+                font-size: 1.4rem;
+            }
+
+            .benefits {
+                gap: 1rem;
+            }
+
+            .benefit-item {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Rewards Modal */
+        .rewards-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rewards-modal.active {
+            display: flex;
+        }
+
+        .rewards-content {
+            background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: white;
+        }
+
+        .close-rewards {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: white;
+            transition: all 0.3s;
+            padding: 0;
+        }
+
+        .close-rewards:hover {
+            transform: rotate(90deg);
+            opacity: 0.8;
+        }
+
+        .rewards-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+
+        .coupon-box {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px dashed white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .coupon-text {
+            font-size: 0.9rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .coupon-code {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .coupon-description {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .coupon-expires {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+
+        .copy-btn {
+            background: white;
+            color: var(--pink);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .copy-btn.copied {
+            background: #4CAF50;
+            color: white;
         }
 
         /* Features Section */
@@ -612,6 +977,100 @@
             transform: translateY(0);
         }
 
+        /* Locations Modal */
+        .locations-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .locations-modal.active {
+            display: flex;
+        }
+
+        .locations-content {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--dark);
+            transition: all 0.3s;
+            padding: 0;
+        }
+
+        .close-modal:hover {
+            color: var(--pink);
+            transform: rotate(90deg);
+        }
+
+        .locations-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 2rem;
+            margin-top: 1rem;
+        }
+
+        .location-card {
+            border: 2px solid var(--cream);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .location-card:hover {
+            border-color: var(--pink);
+            box-shadow: 0 10px 30px rgba(139, 21, 56, 0.1);
+        }
+
+        .location-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--pink);
+            margin-bottom: 0.5rem;
+        }
+
+        .location-card p {
+            color: var(--gray);
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             header {
@@ -685,7 +1144,7 @@
                 <li><a href="#locations">Locations</a></li>
                 <li><a href="#rewards">Rewards</a></li>
             </ul>
-            <button class="order-btn">Order Delivery</button>
+            <button class="order-btn" id="rewardsBtn">🎁 Daily Reward</button>
         </nav>
     </header>
 
@@ -730,6 +1189,7 @@
                         <span class="calories-badge">350 cal</span>
                         <span class="available-tag">Available Now</span>
                     </div>
+                    <button class="learn-more-btn" data-cookie="amourfraise">Learn More</button>
                 </div>
             </div>
 
@@ -744,6 +1204,7 @@
                         <span class="calories-badge">450 cal</span>
                         <span class="available-tag">Available Now</span>
                     </div>
+                    <button class="learn-more-btn" data-cookie="loveatfirstbite">Learn More</button>
                 </div>
             </div>
 
@@ -758,6 +1219,7 @@
                         <span class="calories-badge">650 cal</span>
                         <span class="available-tag">Available Now</span>
                     </div>
+                    <button class="learn-more-btn" data-cookie="oreocraze">Learn More</button>
                 </div>
             </div>
 
@@ -772,6 +1234,7 @@
                         <span class="calories-badge">350 cal</span>
                         <span class="available-tag">Available Now</span>
                     </div>
+                    <button class="learn-more-btn" data-cookie="theoriginal">Learn More</button>
                 </div>
             </div>
 
@@ -786,6 +1249,7 @@
                         <span class="calories-badge">450 cal</span>
                         <span class="available-tag">Available Now</span>
                     </div>
+                    <button class="learn-more-btn" data-cookie="saltedcaramel">Learn More</button>
                 </div>
             </div>
 
@@ -800,6 +1264,7 @@
                         <span class="calories-badge">400 cal</span>
                         <span class="available-tag">Available Now</span>
                     </div>
+                    <button class="learn-more-btn" data-cookie="chocolatechip">Learn More</button>
                 </div>
             </div>
         </div>
@@ -829,6 +1294,65 @@
                 <div class="feature-icon">⭐</div>
                 <h3 class="feature-title">Premium Quality</h3>
                 <p class="feature-description">Only the finest ingredients in every single cookie.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="section-title">
+            <h2>What Our Customers Say</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"The best cookies I've ever tasted! The Love at first bite was absolutely delicious, and delivered right to my door. I'm ordering again this week!"</p>
+                <div class="testimonial-author">Anthea Cay Domingo</div>
+                <div class="testimonial-role">Verified Customer</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"I love the weekly rotation! Every Monday I'm excited to see what new flavors Mejañoa has. The Salted Caramel is my favorite. Highly recommend!"</p>
+                <div class="testimonial-author">Ms MariMar</div>
+                <div class="testimonial-role">Regular Customer</div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Premium quality ingredients you can taste in every bite. The warm delivery is such a nice touch. This is my go-to place for special occasions and just because moments!"</p>
+                <div class="testimonial-author">Nate Arro</div>
+                <div class="testimonial-role">Loyal Customer</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="rewards" id="rewards">
+        <div class="section-title">
+            <h2>🎁 Daily Rewards</h2>
+            <p>Get Your Exclusive Daily Coupon</p>
+        </div>
+        <div class="rewards-section-content">
+            <div class="rewards-info">
+                <h3>Earn Exclusive Discounts Every Day</h3>
+                <p>Visit us daily and claim your personalized coupon. Each day brings a new surprise offer - from discounts to free shipping to buy-one-get-one deals!</p>
+                <button class="btn-primary" id="rewardsBtnSection">Claim Your Daily Reward</button>
+            </div>
+            <div class="rewards-benefits">
+                <div class="benefit-item">
+                    <div class="benefit-emoji">💝</div>
+                    <h4>Daily Variety</h4>
+                    <p>New discount every day</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-emoji">⚡</div>
+                    <h4>Instant Coupon</h4>
+                    <p>Copy your code instantly</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-emoji">🎯</div>
+                    <h4>Easy to Use</h4>
+                    <p>Valid for 24 hours</p>
+                </div>
             </div>
         </div>
     </section>
@@ -875,6 +1399,69 @@
             <p>&copy; 2024 Mejañoa Delights. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Locations Modal -->
+    <div class="locations-modal" id="locationsModal">
+        <div class="locations-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <h2 class="locations-title">Our Locations</h2>
+            
+            <div class="location-card">
+                <h3>📍 Downtown Metro</h3>
+                <p><strong>Address:</strong> 123 Main Street, Downtown</p>
+                <p><strong>Hours:</strong> Mon-Sun, 9:00 AM - 10:00 PM</p>
+                <p><strong>Phone:</strong> +63 555-0101</p>
+            </div>
+
+            <div class="location-card">
+                <h3>📍 Westside Mall</h3>
+                <p><strong>Address:</strong> 456 Shopping Center, Westside</p>
+                <p><strong>Hours:</strong> Mon-Sun, 10:00 AM - 9:00 PM</p>
+                <p><strong>Phone:</strong> +63 555-0102</p>
+            </div>
+
+            <div class="location-card">
+                <h3>📍 Northgate Commons</h3>
+                <p><strong>Address:</strong> 789 Commons Ave, North District</p>
+                <p><strong>Hours:</strong> Mon-Sun, 9:00 AM - 11:00 PM</p>
+                <p><strong>Phone:</strong> +63 555-0103</p>
+            </div>
+
+            <div class="location-card">
+                <h3>📍 Eastport Station</h3>
+                <p><strong>Address:</strong> 321 Station Road, East Harbor</p>
+                <p><strong>Hours:</strong> Mon-Sun, 8:00 AM - 10:00 PM</p>
+                <p><strong>Phone:</strong> +63 555-0104</p>
+            </div>
+        </div>
+    </div>
+
+        <!-- Info Modal (Learn More) -->
+        <div class="info-modal" id="infoModal">
+            <div class="info-content">
+                <button class="info-close" id="infoClose">&times;</button>
+                <div class="info-title" id="infoTitle">Cookie Name</div>
+                <div class="info-sub" id="infoSubtitle">Short tagline</div>
+                <div class="info-body" id="infoBody">Full description about the cookie, ingredients, allergens, and special notes.</div>
+            </div>
+        </div>
+
+        <!-- Rewards Modal -->
+        <div class="rewards-modal" id="rewardsModal">
+        <div class="rewards-content">
+            <button class="close-rewards" id="closeRewards">&times;</button>
+            <h2 class="rewards-title">🎁 Daily Reward</h2>
+            <p class="coupon-text">Get your exclusive daily coupon!</p>
+            
+            <div class="coupon-box">
+                <div class="coupon-code" id="couponCode">LOADING...</div>
+                <div class="coupon-description" id="couponDescription">Loading your reward...</div>
+                <div class="coupon-expires">Valid for today only!</div>
+            </div>
+
+            <button class="copy-btn" id="copyBtn">Copy Code</button>
+        </div>
+    </div>
 
     <script>
         // Header scroll effect
@@ -938,6 +1525,166 @@
                 hero.style.transform = `translateY(${scrolled * 0.5}px)`;
             }
         });
+
+        // Locations modal
+        const locationBtn = document.getElementById('locationBtn');
+        const locationsModal = document.getElementById('locationsModal');
+        const closeModal = document.getElementById('closeModal');
+
+        locationBtn.addEventListener('click', () => {
+            locationsModal.classList.add('active');
+        });
+
+        closeModal.addEventListener('click', () => {
+            locationsModal.classList.remove('active');
+        });
+
+        locationsModal.addEventListener('click', (e) => {
+            if (e.target === locationsModal) {
+                locationsModal.classList.remove('active');
+            }
+        });
+
+        // Daily Rewards System
+        const rewardsBtn = document.getElementById('rewardsBtn');
+        const rewardsBtnSection = document.getElementById('rewardsBtnSection');
+        const rewardsModal = document.getElementById('rewardsModal');
+        const closeRewards = document.getElementById('closeRewards');
+        const copyBtn = document.getElementById('copyBtn');
+        const couponCode = document.getElementById('couponCode');
+        const couponDescription = document.getElementById('couponDescription');
+
+        // Check if all required elements exist
+        if (!rewardsBtn || !rewardsModal || !closeRewards || !copyBtn || !couponCode || !couponDescription) {
+            console.error('Rewards system: One or more required elements are missing from the DOM');
+        } else {
+            const dailyCoupons = [
+                { code: 'SWEET20', discount: '20% OFF', description: '20% off your entire order' },
+                { code: 'FRIDAY15', discount: '15% OFF', description: '$15 off orders over $50' },
+                { code: 'FREESHIP', discount: 'FREE DELIVERY', description: 'Free shipping on any order' },
+                { code: 'BOGO50', discount: 'BUY 1 GET 1', description: 'Buy 1, Get 1 at 50% off' },
+                { code: 'TREAT10', discount: '10% OFF', description: '10% off + free cookie' },
+                { code: 'LUCKY25', discount: '25% OFF', description: '25% off select items' }
+            ];
+
+            function generateDailyCoupon() {
+                const today = new Date().toDateString();
+                const stored = localStorage.getItem('mejanoaCoupon');
+                const storedDate = localStorage.getItem('mejanoaCouponDate');
+
+                if (stored && storedDate === today) {
+                    return JSON.parse(stored);
+                }
+
+                // Generate random coupon for today
+                const randomCoupon = dailyCoupons[Math.floor(Math.random() * dailyCoupons.length)];
+                localStorage.setItem('mejanoaCoupon', JSON.stringify(randomCoupon));
+                localStorage.setItem('mejanoaCouponDate', today);
+
+                return randomCoupon;
+            }
+
+            function displayCoupon() {
+                const coupon = generateDailyCoupon();
+                couponCode.textContent = coupon.code;
+                couponDescription.textContent = coupon.description;
+            }
+
+            // Event listener for header rewards button
+            rewardsBtn.addEventListener('click', () => {
+                displayCoupon();
+                rewardsModal.classList.add('active');
+            });
+
+            // Event listener for section rewards button
+            if (rewardsBtnSection) {
+                rewardsBtnSection.addEventListener('click', () => {
+                    displayCoupon();
+                    rewardsModal.classList.add('active');
+                });
+            }
+
+            closeRewards.addEventListener('click', () => {
+                rewardsModal.classList.remove('active');
+            });
+
+            rewardsModal.addEventListener('click', (e) => {
+                if (e.target === rewardsModal) {
+                    rewardsModal.classList.remove('active');
+                }
+            });
+
+            copyBtn.addEventListener('click', () => {
+                const code = couponCode.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    copyBtn.textContent = '✓ Copied!';
+                    copyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        copyBtn.textContent = 'Copy Code';
+                        copyBtn.classList.remove('copied');
+                    }, 2000);
+                }).catch(() => {
+                    // Fallback for older browsers
+                    alert('Coupon code: ' + code);
+                });
+            });
+        }
+
+        // Learn More buttons
+        // Learn More buttons -> open info modal with cookie-specific details
+        const learnMoreBtns = document.querySelectorAll('.learn-more-btn');
+        const infoModal = document.getElementById('infoModal');
+        const infoClose = document.getElementById('infoClose');
+        const infoTitle = document.getElementById('infoTitle');
+        const infoSubtitle = document.getElementById('infoSubtitle');
+        const infoBody = document.getElementById('infoBody');
+
+        const cookieInfo = {
+            amourfraise: {
+                title: 'Amour Fraisé',
+                subtitle: 'Delicate Strawberry Heart',
+                body: 'A sweet strawberry cookie with a hint of vanilla, topped with a delicate pink heart. Ingredients: flour, butter, sugar, strawberries. Contains: dairy, wheat.'
+            },
+            loveatfirstbite: {
+                title: 'Love At First Bite',
+                subtitle: 'Soft & Chewy Vanilla',
+                body: 'Soft and chewy cookie with rich vanilla flavor and a melt-in-your-mouth center. Ingredients: flour, butter, vanilla, sugar. Contains: dairy, wheat.'
+            },
+            oreocraze: {
+                title: 'Oreo Craze',
+                subtitle: 'Chocolate & Cream',
+                body: 'Chocolate cookie with a creamy Oreo-inspired filling and crunchy topping. Ingredients: cocoa, cream, flour. Contains: dairy, wheat.'
+            },
+            theoriginal: {
+                title: 'The OG',
+                subtitle: 'Cinnamon Sugar Classic',
+                body: 'A cinnamon sugar cookie with buttery texture and warm spices. Ingredients: butter, cinnamon, sugar. Contains: dairy, wheat.'
+            },
+            saltedcaramel: {
+                title: 'Salted Caramel',
+                subtitle: 'Sweet & Salty',
+                body: 'Rich caramel cookie with a hint of sea salt for perfect balance. Ingredients: caramel, butter, sugar. Contains: dairy, wheat.'
+            },
+            chocolatechip: {
+                title: 'Chocolate Chip',
+                subtitle: 'Classic Favorite',
+                body: 'Classic chocolate chip cookie loaded with gooey chocolate. Ingredients: chocolate, butter, flour. Contains: dairy, wheat.'
+            }
+        };
+
+        learnMoreBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const key = btn.getAttribute('data-cookie');
+                const info = cookieInfo[key] || { title: 'Cookie', subtitle: '', body: 'No details available.' };
+                infoTitle.textContent = info.title;
+                infoSubtitle.textContent = info.subtitle;
+                infoBody.textContent = info.body;
+                infoModal.classList.add('active');
+            });
+        });
+
+        infoClose.addEventListener('click', () => infoModal.classList.remove('active'));
+        infoModal.addEventListener('click', (e) => { if (e.target === infoModal) infoModal.classList.remove('active'); });
     </script>
 </body>
 </html>
